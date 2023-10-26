@@ -1,19 +1,21 @@
 <template>
   <div>
-    <TheHeader />
+    <TheHeader @login="login" @logout="logout" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/nav/TheHeader.vue";
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     TheHeader,
   },
   data() {
     return {
-      isLoggedIn: false,
+      //      isLoggedIn: false,
       cart: { items: [], total: 0, qty: 0 },
       products: [
         {
@@ -47,13 +49,10 @@ export default {
   },
   provide() {
     return {
-      isLoggedIn: this.isLoggedIn,
       products: this.products,
       cart: this.cart,
       addProductToCart: this.addProductToCart,
       removeProductFromCart: this.removeProductFromCart,
-      login: this.login,
-      logout: this.logout,
     };
   },
   methods: {
@@ -88,11 +87,14 @@ export default {
     },
 
     login() {
-      this.isLoggedIn = true;
+      this.$store.dispatch("login");
     },
     logout() {
-      this.isLoggedIn = false;
+      this.$store.dispatch("logout");
     },
+  },
+  computed: {
+    ...mapGetters(["isLogged"]),
   },
 };
 </script>

@@ -11,21 +11,28 @@
           <router-link to="/cart">Cart</router-link>
           <BaseBadge mode="elegant">{{ cart.qty }}</BaseBadge>
         </li>
-        <li v-if="isLoggedIn">
+        <li v-if="isLogged">
           <router-link to="/admin">Admin</router-link>
         </li>
       </ul>
     </nav>
     <div>
-      <button v-if="!isLoggedIn" @click="login">Login</button>
-      <button v-if="isLoggedIn">Logout</button>
+      <button v-if="!isLogged" @click="$emit('login')">Login</button>
+      <button v-if="isLogged" @click="$emit('logout')">Logout</button>
     </div>
   </header>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  inject: ["isLoggedIn", "login", "logout", "cart"],
+  emits: ["login", "logout"],
+  inject: ["cart"],
+  methods: {},
+  computed: {
+    ...mapGetters(["isLogged"]),
+  },
 };
 </script>
 
