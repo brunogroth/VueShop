@@ -50,30 +50,13 @@ export default {
   provide() {
     return {
       products: this.products,
-      cart: this.cart,
       addProductToCart: this.addProductToCart,
       removeProductFromCart: this.removeProductFromCart,
     };
   },
   methods: {
     addProductToCart(productData) {
-      const productInCartIndex = this.cart.items.findIndex(
-        (ci) => ci.productId === productData.id
-      );
-      if (productInCartIndex >= 0) {
-        this.cart.items[productInCartIndex].qty++;
-      } else {
-        const newItem = {
-          productId: productData.id,
-          title: productData.title,
-          image: productData.image,
-          price: productData.price,
-          qty: 1,
-        };
-        this.cart.items.push(newItem);
-      }
-      this.cart.qty++;
-      this.cart.total += productData.price;
+      this.$store.dispatch("cartModule/addToCart", productData);
     },
 
     removeProductFromCart(prodId) {
@@ -87,14 +70,11 @@ export default {
     },
 
     login() {
-      this.$store.dispatch("login");
+      this.$store.dispatch("sessionModule/login");
     },
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("sessionModule/logout");
     },
-  },
-  computed: {
-    ...mapGetters(["isLogged"]),
   },
 };
 </script>
