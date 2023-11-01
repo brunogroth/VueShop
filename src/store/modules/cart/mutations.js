@@ -1,25 +1,26 @@
 export default {
   addToCart(state, payload) {
-    state.cart.total++;
+    console.log(payload.value);
     //    state.cart.items.push(payload);
-    const productInCartIndex = this.state.cart.items.findIndex(
-      (ci) => ci.productId === productData.id
+    const productInCartIndex = state.cart.items.findIndex(
+      (ci) => ci.productId === payload.value.productId
     );
     if (productInCartIndex >= 0) {
-      this.cart.items[productInCartIndex].qty++;
+      state.cart.items[productInCartIndex].qty++;
       console.log("+1");
     } else {
       const newItem = {
-        productId: productData.id,
-        title: productData.title,
-        image: productData.image,
-        price: productData.price,
+        productId: payload.value.productId,
+        title: payload.value.title,
+        image: payload.value.image,
+        price: payload.value.price,
         qty: 1,
       };
-      console.log(newItem);
-      this.cart.items.push(newItem);
+      console.log("newItem", newItem);
+      state.cart.items.push(newItem);
     }
-    this.store.cart.qty++;
-    this.store.cart.total += productData.price;
+    state.cart.qty++;
+    console.log("payload.value", payload.value);
+    state.cart.total += payload.value.price;
   },
 };

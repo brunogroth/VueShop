@@ -8,6 +8,7 @@ export default {
     return {
       cart: {
         items: [],
+        qty: 0,
         total: 0,
       },
     };

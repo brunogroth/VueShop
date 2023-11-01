@@ -2,7 +2,8 @@
   <section>
     <h2>Your Cart</h2>
     <h3>
-      Total Amount: <base-badge mode="elegant">${{ cartTotal }}</base-badge>
+      Total Amount:
+      <base-badge mode="elegant">${{ cartTotalItems }}</base-badge>
     </h3>
     <ul>
       <cart-item
@@ -26,7 +27,7 @@ export default {
     CartItem,
   },
   computed: {
-    ...mapGetters("cartModule", ["cartTotal", "cart"]),
+    ...mapGetters("cartModule", ["cartTotalItems", "cart"]),
   },
 };
 </script>
