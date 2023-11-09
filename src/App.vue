@@ -50,8 +50,6 @@ export default {
   provide() {
     return {
       products: this.products,
-      addProductToCart: this.addProductToCart,
-      removeProductFromCart: this.removeProductFromCart,
     };
   },
   methods: {
@@ -59,15 +57,15 @@ export default {
       this.$store.dispatch("cartModule/addToCart", productData);
     },
 
-    removeProductFromCart(prodId) {
-      const productInCartIndex = this.cart.items.findIndex(
-        (cartItem) => cartItem.productId === prodId
-      );
-      const prodData = this.cart.items[productInCartIndex];
-      this.cart.items.splice(productInCartIndex, 1);
-      this.cart.qty -= prodData.qty;
-      this.cart.total -= prodData.price * prodData.qty;
-    },
+    // removeProductFromCart(prodId) {
+    //   const productInCartIndex = this.cart.items.findIndex(
+    //     (cartItem) => cartItem.productId === prodId
+    //   );
+    //   const prodData = this.cart.items[productInCartIndex];
+    //   this.cart.items.splice(productInCartIndex, 1);
+    //   this.cart.qty -= prodData.qty;
+    //   this.cart.total -= prodData.price * prodData.qty;
+    // },
 
     login() {
       this.$store.dispatch("sessionModule/login");
