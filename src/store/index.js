@@ -6,16 +6,13 @@ import rootGetters from "./getters";
 // MODULES
 import sessionModule from "./modules/session";
 import cartModule from "./modules/cart";
+import productsModule from "./modules/products";
 
 const store = createStore({
   modules: {
     sessionModule: sessionModule,
     cartModule: cartModule,
-  },
-  state() {
-    return {
-      isLogged: false,
-    };
+    productsModule: productsModule,
   },
 
   mutations: rootMutations,
